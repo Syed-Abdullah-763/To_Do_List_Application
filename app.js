@@ -11,7 +11,7 @@ function getValue() {
         input.style.outline = "none"
     }
 
-    if (parent.children.length = 5 ) {
+    if (parent.children.length == 5 ) {
         var note = document.getElementById("note")
         var h6 = document.createElement("h6")
         h6.innerHTML = "Not Enough Space"
