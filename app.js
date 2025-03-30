@@ -5,24 +5,19 @@ function getValue() {
     var input = document.getElementById("input");
 
     //Length Error
-    if (input.value.length <= 4) {
-        var input = document.getElementById("input");
-        input.style.outline = "1px solid red"
-
-        if (note.children.length == 0) {
-            var p = document.createElement("p")
-            p.innerHTML = "Write atleast 5 characters."
-            p.style.color = "red"
-
-            note.appendChild(p)
-        }else if (note.children.length == 1) {
-            note.removeChild(note.children[0])
-            var p = document.createElement("p")
-            p.innerHTML = "Write atleast 5 characters."
-            p.style.color = "red"
-
-            note.appendChild(p)
+    function showError(message) {
+        if (note.children.length > 0) {
+            note.removeChild(note.children[0]);
         }
+        var p = document.createElement("p");
+        p.innerHTML = message;
+        p.style.color = "red";
+        note.appendChild(p);
+    }
+
+    if (input.value.length <= 4) {
+        input.style.outline = "1px solid red";
+        showError("Write atleast 5 characters.");
     } else {
         input.style.outline = "none"
 
@@ -46,7 +41,7 @@ function getValue() {
         var liElement = document.createElement("li")
         if (parent.children.length >= 1) {
             parent.insertBefore(liElement, parent.children[0])
-        }else {
+        } else {
             parent.appendChild(liElement)
         }
 
@@ -61,6 +56,7 @@ function getValue() {
         var edit = document.createElement("button")
         edit.innerHTML = "Edit"
         edit.setAttribute("class", "edit")
+        edit.setAttribute("onclick", "editVal(this)")
         btns.appendChild(edit)
 
         var deleteBtn = document.createElement("button")
@@ -89,5 +85,32 @@ function deleteval(btn) {
         p.style.color = "red"
 
         note.appendChild(p)
+    }
+}
+
+
+
+function editVal(btn) {
+    var liElement = btn.parentElement.parentElement;
+    var h4 = liElement.querySelector("h4");
+
+
+    if (btn.innerHTML == "Done") {
+        // create newh4
+        var newh4 = document.createElement("h4")
+        newh4.innerHTML = liElement.firstElementChild.value;
+
+        liElement.replaceChild(newh4, liElement.firstElementChild);
+        btn.innerHTML = "Edit"
+    } else {
+        // create Input Field
+        var inputField = document.createElement("input");
+        inputField.type = "text";
+        inputField.value = h4.innerHTML;
+        inputField.value = h4.innerHTML;
+        inputField.setAttribute("class", "inputField")
+
+        liElement.replaceChild(inputField, h4);
+        btn.innerHTML = "Done"
     }
 }
