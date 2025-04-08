@@ -1,6 +1,7 @@
 var parent = document.getElementById("parent")
 var note = document.getElementById("note")
 
+// Insert Btn
 function getValue() {
     var input = document.getElementById("input");
 
@@ -69,7 +70,7 @@ function getValue() {
     }
 }
 
-
+// Remove Btn
 function deleteval(btn) {
     btn.parentElement.parentElement.remove()
 
@@ -89,7 +90,7 @@ function deleteval(btn) {
 }
 
 
-
+// Edit Btn 
 function editVal(btn) {
     var liElement = btn.parentElement.parentElement;
     var h4 = liElement.querySelector("h4");
